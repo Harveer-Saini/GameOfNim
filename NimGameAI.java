@@ -1,14 +1,29 @@
-public class NimGameAI { 
+import java.util.Random;
+
+public class NimGameAI {
+    private int strategyLevel;
+    private Random random;
+
+    // Constructor
+    public NimGameAI(int strategyLevel) {
+        this.strategyLevel = strategyLevel;
+        this.random = new Random();
+    }
+
     // Method to determine the best move for AI
-    public static int calculateAIMove(int piecesLeft) {
+    public int calculateAIMove(int piecesLeft) {
         int maxTake = piecesLeft / 2;
         if (maxTake < 1) {
             maxTake = 1;
         }
 
-        // Find target based on P-position logic
-        int idealCount = nearestPowerOfTwoMinusOne(piecesLeft);
+        // Strategy 1: Random move
+        if (strategyLevel == 1) {
+            return random.nextInt(maxTake) + 1;
+        }
 
+        // Strategy 2: Optimal move (default logic)
+        int idealCount = nearestPowerOfTwoMinusOne(piecesLeft);
         int aiRemove = piecesLeft - idealCount;
 
         if (aiRemove < 1 || aiRemove > maxTake) {
