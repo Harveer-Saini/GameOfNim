@@ -7,7 +7,11 @@ public class NimGame {
 
         int piecesLeft = 20; // Number of pieces initially in the game
 
-        // Starting the AI 
+        // Initialize the AI with a strategy level
+        System.out.print("Choose AI Strategy Level (1: Random, 2: Optimal): ");
+        int strategyLevel = input.nextInt();
+        NimGameAI ai = new NimGameAI(strategyLevel);
+
         boolean aiTurn = true;
 
         System.out.println("Game of Nim!");
@@ -20,7 +24,7 @@ public class NimGame {
 
             if (aiTurn) {
                 // AI's move
-                int aiRemove = NimGameAI.calculateAIMove(piecesLeft);
+                int aiRemove = ai.calculateAIMove(piecesLeft);
                 piecesLeft -= aiRemove;
                 System.out.println("The AI removed " + aiRemove + " piece(s).");
             } else {
